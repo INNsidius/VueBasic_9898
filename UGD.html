@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unguided</title>
+        <script src="vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>TEBAK ANGKA</h2>
+            
+            <p>
+                Tebak 1-10
+            </p>
+
+            <div>
+                <input v-model="angka" placeholder="Tebak berapa hayoo..">
+                
+            </div>
+
+            <div>
+                <button @click="tebak">TEBAK</button>
+                <h2>{{ teks }}</h2>
+                <h2>{{ jawaban }}</h2>
+                <h2> Sisa kesempatan {{ kesempatan }} </h2>
+                
+            </div>
+
+            <div>
+                <button @click="reset">RESET</button>
+            </div>
+        </div>
+    </body>
+    <footer>
+        Innosensius Tolanda | 180709898 | Kelas PAW B
+    </footer>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                    hasil: Math.floor((Math.random() * 10) + 1), 
+                    kesempatan: 3,
+                    teks: "",
+                    patan: "",
+                    angka: '',
+                    jawaban: "",
+            },
+            methods: {
+                tebak(){
+                    if(this.kesempatan != 0){
+                        if(this.angka == this.hasil) {
+                        this.teks='BETUL'
+                        }else{
+                            if(this.kesempatan == 0 )
+                            {
+                                
+                            }else{
+                                this.kesempatan--;
+                                this.teks='salah';
+                            }
+                        }  
+                    }else{
+                        this.teks='SILAHKAN RESET';
+                        this.teks='kesempatan habis ';
+                        this.jawaban= `Jawabannya adalah ${this.hasil}`;
+                    }
+                },
+                reset(){
+                    this.hasil=Math.floor((Math.random() * 10) + 1);
+                    this.kesempatan=3;
+                    this.teks='';
+                    this.jawaban='';
+                }
+            },
+        });
+    </script>
+
+</html>
